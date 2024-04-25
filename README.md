@@ -41,19 +41,28 @@ You can save that repo anywhere as of now in your system.
 ### Step 3
 * Create a IAM role for the EC2 Instance and Attach the **AmazonSSMManagedInstanceCore** and **AmazonS3ReadOnlyAccess** policies to it.
 
-### Step 4
+### Step 4 
+* Create a S3 Bucket
+
+### Step 5
 
 * Now Navigate to RDS service and create a Subnet Group create a subnet group and add the **Private-Subnet-AZ1** and **Private-Subnet-AZ2** to it.
 * Navigate to the Databases Section and Create a Mysql/Aurora Database with Aurora Replica Reader Node to it.
 
 
-### Step 5
+### Step 6
 * Navigate to the EC2 service and setup a EC2 instance with Private Subent that is App tier.
 
 * After creating Private App Tier instances Setup load Balancer and Auto Scaling Groups to it.
+
+* In the downloaded github repo navigate to **application-code/app-tier/DbConfig.js** file from the github repo in your favorite text editor on your computer. You’ll see empty strings for the hostname, user, password and database. Fill this in with the credentials you configured for your database, the writer endpoint of your database as the hostname, and webappdb for the database. Save the file and upload **app-tier** folder.
+
+### Step 7
+
 
 * Crate EC2 instances for the Public Web Tier Application with Public Subnet. 
 
 * Setting up a External load balancer that will connected with a Auto Scaling group Attached to it.
 
+* open up the application-code/nginx.conf file from the repo we downloaded. Scroll down to line 58 and replace [INTERNAL-LOADBALANCER-DNS] with your internal load balancer’s DNS entry. You can find this by navigating to your internal load balancer's details page and upload **application-code/web-tier** folder to your s3 Bucket.
 
